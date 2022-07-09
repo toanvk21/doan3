@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/dirPagination.js"></script>
+<script src="~/App/Admin/Order/app.js"></script>
+
+<div ng-app="Order">
+    <div ng-controller="OrderController" ng-init="GetAllOrder('')">
+        <div class="row">
+            <input class="col-md-4" id="txtSearch" placeholder="Nhập từ khóa cần tìm"/>
+            <input type="submit" value="Tìm kiếm" class="btn btn-success col-md-1" ng-click="GetAllOrder(document.getElementById('txtSearch').value.toString())"/>
+        </div>
+        <br/>
+        <table cellpadding="12" class="table-bordered table-hover table">
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Ngày</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>SĐT liên hệ</th>
+                <th>Ghi chú</th>
+                <th>Tùy chọn</th>
+            </tr>
+            <tr dir-paginate="item in OrderList|itemsPerPage:5">
+                <td>{{item.ID}}</td>
+                <td>{{item.FirstName}} {{item.LastName}}</td>
+                <td>
+                    {{item.Date}}
+                </td>
+                <td>{{item.Email}}</td>
+                <td>{{item.Address}}</td>
+                <td>{{item.PhoneNumber}}</td>
+                <td>{{item.Note}}</td>
+                <td>
+                    <a class="btn btn-primary" ng-click="LoadOrder(item.ID)" href="@Url.Action("Details", "Order")">Thông tin chi tiết</a>
+                </td>
+            </tr>
+        </table>
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true"
+            on-page-change="pageChanged(newPageNumber)">
+        </dir-pagination-controls>
+
+    </div>
+</div>

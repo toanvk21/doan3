@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/dirPagination.js"></script>
+<script src="~/App/Home/app.js"></script>
+<a href="#" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-user-o"></i> Đăng nhập trang quản trị</a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" ng-app="Home">
+    <div class="modal-dialog modal-dialog-centered" role="document" style="width: 300px" ng-controller="HomeController">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalCenterTitle">Đăng nhập</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h5>Tài khoản: </h5>
+                    <input class="form-control" placeholder="Tài khoản" type="text" ng-model="_Username">
+                </div>
+                <div class="form-group">
+                    <h5 >Mật khẩu: </h5>
+                    <input class="form-control" placeholder="Mật khẩu" type="password" ng-model="_Password">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a  class="btn btn-primary" ng-click="Login()">Đăng nhập</a>
+            </div>
+        </div>
+    </div>
+</div>

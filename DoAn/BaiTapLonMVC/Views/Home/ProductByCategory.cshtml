@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/dirPagination.js"></script>
+<script src="~/App/Home/app.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@RenderPage("~/Views/Home/NavCategory.cshtml")
+<div ng-app="Home">
+    <div ng-controller="HomeController" ng-init="GetProductByCategory()">
+        <!-- SECTION -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+
+                    <!-- section title -->
+                    <div class="col-md-12">
+                        <div class="section-title">
+                            <h5 class="title">Danh sách sản phẩm: </h5>
+                            <hr/>
+                        </div>
+                    </div>
+                    <!-- /section title -->
+
+                    <!-- Products tab & slick -->
+                    <div class="col-md-12">
+                        <div class="row">
+                            <!-- product -->
+                            <div class="product col-md-3 col-lg-3 col-sm-3" dir-paginate="item in ProductListByCategory|itemsPerPage:8" >
+                                <div class="product-img">
+                                    <img src="{{item.Image}}" alt="">
+                                </div>
+                                <div class="product-body">
+                                    <h3 class="product-name">
+                                        <a href="#">{{item.Name}}</a>
+                                    </h3>
+                                    <h4 class="product-price">{{item.Cost.toLocaleString(vi-VN)}} VNĐ</h4>
+                                    <hr/>
+                                    <div class="product-btns">
+                                        <a class="quick-view" ng-click="GetProduct(item.ID)" href="@Url.Action("DetailsProduct", "Home")">
+                                            <i class="fa fa-eye"></i><span class="tooltipp">Thông tin sản phẩm</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="add-to-cart" style="background-color: white;border-style: ridge;border-color: red;border-width: 1px">
+                                    <button class="add-to-cart-btn" ng-click="AddCart(item.ID)"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button>
+                                </div>
+                            </div>
+                            <!-- /product -->
+                        </div>
+                        <ul>
+                            <dir-pagination-controls
+                                direction-links="true"
+                                boundary-links="true"
+                                on-page-change="pageChanged(newPageNumber)">
+                            </dir-pagination-controls>
+                        </ul>
+                    </div>
+                    <!-- /Products tab & slick -->
+                </div>
+                <!-- /row -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /SECTION -->
+    </div>
+</div>

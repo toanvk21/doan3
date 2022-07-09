@@ -1,0 +1,54 @@
+﻿
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/App/Home/app.js"></script>
+<script src="~/Scripts/dirPagination.js"></script>
+
+<br/>
+<div ng-app="Home" class="container">
+    <div ng-controller="HomeController">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <input class="col-md-4 form-control" id="txtSearch" placeholder="Nhập đơn hàng cần tìm"/>
+            <input type="submit" value="Tra đơn hàng" class="btn btn-danger col-md-2" ng-click="GetAllTracking(document.getElementById('txtSearch').value.toString())"/>
+        </div>
+        <br/>
+        <table cellpadding="12" class="table-bordered table-hover table">
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Ngày</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>SĐT liên hệ</th>
+                <th>Ghi chú</th>
+                <th>Tùy chọn</th>
+            </tr>
+            <tr dir-paginate="item in OrderList|itemsPerPage:5">
+                <td>{{item.ID}}</td>
+                <td>{{item.FirstName}} {{item.LastName}}</td>
+                <td>
+                    {{item.Date}}
+                </td>
+                <td>{{item.Email}}</td>
+                <td>{{item.Address}}</td>
+                <td>{{item.PhoneNumber}}</td>
+                <td>{{item.Note}}</td>
+                <td>
+                    <a class="btn btn-warning" ng-click="LoadOrder(item.ID)" href="@Url.Action("OrderTracking", "Home")">Tình trạng đơn hàng</a>
+                </td>
+            </tr>
+        </table>
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true"
+            on-page-change="pageChanged(newPageNumber)">
+        </dir-pagination-controls>
+
+    </div>
+</div>
